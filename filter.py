@@ -1,29 +1,39 @@
 from PIL import Image
 import numpy as np
 
-img = Image.open("img2.jpg")
-arr = np.array(img)
-rowsCount = len(arr)
-colsCount = len(arr[1])
-i = 0
-while i < rowsCount:
-    j = 0
-    while j < colsCount:
-        s = 0
-        for n in range(i, i + 10):
-            for n1 in range(j, j + 10):
-                r = arr[n][n1][0]
-                g = arr[n][n1][1]
-                b = arr[n][n1][2]
-                M = r // 3 + g // 3 + b // 3
-                s += M
-        s = int(s // 100)
-        for n in range(i, i + 10):
-            for n1 in range(j, j + 10):
-                arr[n][n1][0] = int(s // 50) * 50
-                arr[n][n1][1] = int(s // 50) * 50
-                arr[n][n1][2] = int(s // 50) * 50
-        j = j + 10
-    i = i + 10
-res = Image.fromarray(arr)
-res.save('res.jpg')
+
+def read(filename):
+    img = Image.open(filename)
+    return np.array(img)
+
+
+def write(array, filename):
+    res = Image.fromarray(array)
+    res.save(filename)
+
+
+def make_image_gray(array, puzzle_size, grayscale):
+    rowsCount = len(array)
+    colsCount = len(array[1])
+
+    for i in range(0, rowsCount, puzzle_size):
+        for j in range(0, colsCount, puzzle_size):
+            average = 0
+            for row in range(i, i + puzzle_size):
+                for col in range(j, j + puzzle_size):
+                    r = array[row][col][0]
+                    g = array[row][col][1]
+                    b = array[row][col][2]
+                    average += (r + g + b) // 3
+            average = int(average // (puzzle_size * puzzle_size))
+            for row in range(i, i + puzzle_size):
+                for col in range(j, j + puzzle_size):
+                    array[row][col][0] = int(average // grayscale) * grayscale
+                    array[row][col][1] = int(average // grayscale) * grayscale
+                    array[row][col][2] = int(average // grayscale) * grayscale
+
+
+if __name__ == "__main__":
+    arr = read("img2.jpg")
+    make_image_gray(arr, 10, 50)
+    write(arr, "res.jpg")
