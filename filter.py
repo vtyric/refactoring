@@ -8,27 +8,11 @@ def read(filename):
 
 
 def get_average(array, start_x, start_y, delta):
-    average = 0
-    for x in range(start_x, start_x + delta):
-        for y in range(start_y, start_y + delta):
-            r = array[x][y][0]
-            g = array[x][y][1]
-            b = array[x][y][2]
-            average += (r // 3 + g // 3 + b // 3)
-    return int(average // (delta * delta))
+    return np.mean(array[start_x:start_x + delta, start_y:start_y + delta])
 
 
 def fill_array(array, start_x, start_y, delta, value):
-    for x in range(start_x, start_x + delta):
-        for y in range(start_y, start_y + delta):
-            array[x][y][0] = value
-            array[x][y][1] = value
-            array[x][y][2] = value
-
-
-def write(array, filename):
-    res = Image.fromarray(array)
-    res.save(filename)
+    array[start_x:start_x + delta, start_y:start_y + delta] = np.array(3 * [value])
 
 
 def make_image_gray(array, puzzle_size, grayscale):
@@ -41,7 +25,12 @@ def make_image_gray(array, puzzle_size, grayscale):
             fill_array(array, x, y, puzzle_size, int(average // grayscale) * grayscale)
 
 
+def write(array, filename):
+    res = Image.fromarray(array)
+    res.save(filename)
+
+
 if __name__ == "__main__":
-    arr = read("632.jpg")
+    arr = read("img2.jpg")
     make_image_gray(arr, 1, 5)
     write(arr, "res.jpg")
