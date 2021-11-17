@@ -18,12 +18,12 @@ def get_average(array, start_x, start_y, puzzle_size):
     return int(average // (puzzle_size * puzzle_size))
 
 
-def fill_array(array, start_x, start_y, puzzle_size, average, grayscale):
+def fill_array(array, start_x, start_y, puzzle_size, value):
     for x in range(start_x, start_x + puzzle_size):
         for y in range(start_y, start_y + puzzle_size):
-            array[x][y][0] = int(average // grayscale) * grayscale
-            array[x][y][1] = int(average // grayscale) * grayscale
-            array[x][y][2] = int(average // grayscale) * grayscale
+            array[x][y][0] = value
+            array[x][y][1] = value
+            array[x][y][2] = value
 
 
 def write(array, filename):
@@ -38,7 +38,7 @@ def make_image_gray(array, puzzle_size, grayscale):
     for x in range(0, max_x, puzzle_size):
         for y in range(0, max_y, puzzle_size):
             average = get_average(array, x, y, puzzle_size)
-            fill_array(array, x, y, puzzle_size, average, grayscale)
+            fill_array(array, x, y, puzzle_size, int(average // grayscale) * grayscale)
 
 
 if __name__ == "__main__":
