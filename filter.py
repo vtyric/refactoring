@@ -31,6 +31,14 @@ def write(array, filename):
 
 
 if __name__ == "__main__":
-    arr = read("img2.jpg")
-    make_image_gray(arr, 1, 5)
-    write(arr, "res.jpg")
+    try:
+        print("введите название картинки, которую нужно изменить:")
+        read_name = input()
+        print("введите название файла, куда созранять картинку:")
+        write_name = input()
+        arr = read(read_name)
+        make_image_gray(arr, 5, 15)
+        write(arr, write_name)
+        print(f"измененая картинка({read_name}) находится в {write_name}")
+    except:
+        print("нет картинки, которую нужно изменить, или нет такого файлика, куда нужно ее сохранять")
