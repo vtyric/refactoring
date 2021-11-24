@@ -28,8 +28,22 @@
 
 ### Пример запуска правильного теста:
 
-![completed-test](refactoring-tasks-images/complete-test.PNG)
+![complete-test](refactoring-tasks-images/complete-test.PNG)
 
 ### Пример неправильного теста:
 
 ![failed-test](refactoring-tasks-images/failed-test.PNG)
+
+## Отладчик:
+
+### Введенные данные:
+
+![input-data](refactoring-tasks-images/input.PNG)
+
+### Свойства и тип изображения:
+
+![image-prop](refactoring-tasks-images/image-prop.PNG)
+
+### Значения ширины блока и градации серого:
+
+![grayscale-puzzle_size](refactoring-tasks-images/grayscale-puzzle_size.PNG)
