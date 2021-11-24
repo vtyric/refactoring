@@ -27,7 +27,7 @@ def get_average(array: np.array, start_x: int, start_y: int, delta: int):
     >>> get_average(np.array([[1, 1, 1], [1, 1, 1]]), 0, 0, 3)
     1.0
     >>> get_average(np.array([[1, 2, 3], [1, 2, 3]]), 0, 0, 3)
-    1.0
+    2.0
     """
     return np.mean(array[start_x:start_x + delta, start_y:start_y + delta])
 
